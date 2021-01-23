@@ -1,4 +1,4 @@
-# Custom Build Example
+# Serverless App Example
 
 This directory is a brief example of using a Custom Build script that can be deployed with Vercel and zero configuration.
 

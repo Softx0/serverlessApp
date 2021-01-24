@@ -35,3 +35,7 @@ ul {
 #submit:hover{
     background-color: #287da1 ;
 }
+
+#submit:disabled{
+    background-color: #ccc;
+}

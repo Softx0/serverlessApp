@@ -19,8 +19,12 @@ window.onload = () => {
         .then(data => {
             const mealsList = document.getElementById('meals-list');
             const template = data.map(x => '<li>' + x.name + '</li>').join('');
-            
-            mealsList.innerHTML = template
-        } );
+            const submit = document.getElementById('submit');
+
+            mealsList.innerHTML = template;
+            submit.removeAttribute('disabled');
+        });
+
+    
 }
 

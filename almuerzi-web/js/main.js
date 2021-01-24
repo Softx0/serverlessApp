@@ -28,9 +28,12 @@ window.onload = () => {
         //añadiendo la principal funcionalidad de seleccion de los platos...
         element.addEventListener('click', () => {
             const mealsList = document.getElementById('meals-list');
+            const mealsIdInput = document.getElementById('mealsId');
 
             Array.from(mealsList.children).forEach( x => x.classList.remove('selected'));
             element.classList.add('selected');
+
+            mealsIdInput.value = item._id;
         });
 
         return element;

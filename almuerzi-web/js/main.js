@@ -1,5 +1,49 @@
+const stringToHTML = (cadena) => {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(cadena, 'text/html');
+    
+    return doc.body.firstChild;
+}
+
+//templates strings
+const renderItem = (item) => {
+    const element = stringToHTML(`<li data-id="${item._id}" >${item.name}</li>`);
+    
+    //añadiendo la principal funcionalidad de seleccion de los platos...
+    element.addEventListener('click', () => {
+        const mealsList = document.getElementById('meals-list');
+        const mealsIdInput = document.getElementById('mealsId');
+
+        Array.from(mealsList.children).forEach( x => x.classList.remove('selected'));
+        element.classList.add('selected');
+
+        mealsIdInput.value = item._id;
+    });
+
+    return element;
+}
 
 window.onload = () => {
+
+    const orderForm = document.getElementById('order');
+    orderForm.onsubmit = (event) => {
+        //para evitar el refresh
+        event.preventDefault();
+
+        const mealId = document.getElementById('mealsId');
+        const mealIdValue = mealId.value;
+        
+        if(!mealIdValue){
+            alert('Debe seleccionar un plato');
+            return
+        }
+
+        const order = {
+            meal_id: mealIdValue,
+            user_id: 'Emmanuel',
+        }
+    }
+
     // fetch('https://serverless-app.softx0.vercel.app/api/meals', {
     //     method: 'GET', //post, put, delete
     //     mode: 'cors',
@@ -13,31 +57,6 @@ window.onload = () => {
     // })
     //     .then(response => response.json()) //.json, .text, .xml
     //     .then(data => console.log(data));
-
-    const stringToHTML = (cadena) => {
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(cadena, 'text/html');
-        
-        return doc.body.firstChild;
-    }
-
-    //templates strings
-    const renderItem = (item) => {
-        const element = stringToHTML(`<li data-id="${item._id}" >${item.name}</li>`);
-        
-        //añadiendo la principal funcionalidad de seleccion de los platos...
-        element.addEventListener('click', () => {
-            const mealsList = document.getElementById('meals-list');
-            const mealsIdInput = document.getElementById('mealsId');
-
-            Array.from(mealsList.children).forEach( x => x.classList.remove('selected'));
-            element.classList.add('selected');
-
-            mealsIdInput.value = item._id;
-        });
-
-        return element;
-    }
 
     fetch('https://serverless-app.softx0.vercel.app/api/meals')
         .then(response => response.json()) //.json, .text, .xml

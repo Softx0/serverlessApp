@@ -14,19 +14,33 @@ window.onload = () => {
     //     .then(response => response.json()) //.json, .text, .xml
     //     .then(data => console.log(data));
 
+    const stringToHTML = (cadena) => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(cadena, 'text/html');
+        
+        return doc.body.firstChild;
+    }
+
     //templates strings
     const renderItem = (item) => {
-        return `<li data-id="${item._id}" >${item.name}</li>`;
+        const element = stringToHTML(`<li data-id="${item._id}" >${item.name}</li>`);
+        
+        return element;
     }
 
     fetch('https://serverless-app.softx0.vercel.app/api/meals')
         .then(response => response.json()) //.json, .text, .xml
         .then(data => {
-            const mealsList = document.getElementById('meals-list');
-            const template = data.map(renderItem).join('');
-            const submit = document.getElementById('submit');
 
-            mealsList.innerHTML = template;
+            const mealsList = document.getElementById('meals-list');
+            const submit = document.getElementById('submit');
+            const listItems = data.map(renderItem);
+            
+            mealsList.removeChild(mealsList.firstElementChild);
+            listItems.forEach(element => {
+                mealsList.appendChild(element);
+            });
+
             submit.removeAttribute('disabled');
         });
 

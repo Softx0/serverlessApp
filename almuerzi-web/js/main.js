@@ -25,6 +25,14 @@ window.onload = () => {
     const renderItem = (item) => {
         const element = stringToHTML(`<li data-id="${item._id}" >${item.name}</li>`);
         
+        //añadiendo la principal funcionalidad de seleccion de los platos...
+        element.addEventListener('click', () => {
+            const mealsList = document.getElementById('meals-list');
+
+            Array.from(mealsList.children).forEach( x => x.classList.remove('selected'));
+            element.classList.add('selected');
+        });
+
         return element;
     }
 

@@ -42,6 +42,14 @@ window.onload = () => {
             meal_id: mealIdValue,
             user_id: 'Emmanuel',
         }
+
+        fetch('https://serverless-app.softx0.vercel.app/api/orders', {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(order),
+            method: 'POST',
+        }).then(x => console.log(x))
     }
 
     // fetch('https://serverless-app.softx0.vercel.app/api/meals', {

@@ -3,6 +3,7 @@ const Users = require('../models/Users');
 const crypto = require('crypto');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
+const { isAuthenticated } = require('../auth/');
 
 const signToken = (_id) => {
     return jwt.sign({ _id }, 'mi-secreto', {
@@ -10,10 +11,11 @@ const signToken = (_id) => {
     })
 };
 
-router.get('/', (req, res) => {
-    Users.find()
-        .exec()
-        .then(x => res.status(200).send(x));
+router.get('/me', isAuthenticated, (req, res) => {
+    res.send(req.user)
+    // Users.find()
+    //     .exec()
+    //     .then(x => res.status(200).send(x));
 });
 
 router.get('/:id', (req, res) => {

@@ -2,6 +2,13 @@ const express = require('express');
 const Users = require('../models/Users');
 const crypto = require('crypto');
 const router = express.Router();
+const jwt = require('jsonwebtoken');
+
+const signToken = (_id) => {
+    return jwt.sign({ _id }, 'mi-secreto', {
+        expiresIn: 60 * 60 * 24 * 365,
+    })
+};
 
 router.get('/', (req, res) => {
     Users.find()

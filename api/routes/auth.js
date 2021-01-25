@@ -12,7 +12,7 @@ const signToken = (_id) => {
 };
 
 router.get('/me', isAuthenticated, (req, res) => {
-    res.send(req.user)
+    res.send(req.user);
 });
 
 router.get('/:id', (req, res) => {

@@ -55,11 +55,13 @@ const initializeForm = () => {
             user_id: 'Shirley',
         }
 
+        const token = localStorage.getItem('token');
+
         fetch(`https://serverless-app.softx0.vercel.app/api/orders`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
-                // Authorization: token,
+                'Content-Type': 'application/json',
+                authorization: token,
             },
             body: JSON.stringify(order)
         }).then(x => x.json())

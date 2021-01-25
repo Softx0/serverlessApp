@@ -32,8 +32,7 @@ const renderOrder = (order, meals) => {
     return element;
 }
 
-window.onload = () => {
-
+const initializeForm = () => {
     const orderForm = document.getElementById('order');
 
     orderForm.onsubmit = (event) => {
@@ -72,7 +71,9 @@ window.onload = () => {
                 submit.removeAttribute('disabled', false);
             });
     }
+}
 
+const initializeData = () => {
     fetch('https://serverless-app.softx0.vercel.app/api/meals')
         .then(response => response.json()) //.json, .text, .xml
         .then(data => {
@@ -101,7 +102,10 @@ window.onload = () => {
                     });
                 });
         });
-
-
 }
 
+window.onload = () => {
+
+    initializeForm();
+    initializeData();
+}

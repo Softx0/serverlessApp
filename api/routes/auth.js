@@ -5,8 +5,8 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
     Users.find()
-    .exec()
-    .then(x => res.status(200).send(x));
+        .exec()
+        .then(x => res.status(200).send(x));
 });
 
 router.get('/:id', (req, res) => {
@@ -16,7 +16,7 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/register', (req, res) => {
-    const {email, password} = req.body
+    const { email, password } = req.body
     crypto.randomBytes(16, (err, salt) => {
         const newSalt = salt.toString('base64');
 
@@ -40,7 +40,23 @@ router.post('/register', (req, res) => {
 });
 
 router.post('/login', (req, res) => {
-    res.send('soy login');
+    const { email, password } = req.body;
+    Users.findOne({ email }).exec()
+        .then(user => {
+            if (!user) {
+                return res.send('Usuario y/o contraseña incorrecta');
+            }
+            crypto.pbkdf2(password, user.salt, 10000, 64, 'sha1', (err, key) => {
+                const encryptedPassword = key.toString('base64');
+
+                if (user.password === encryptedPassword) {
+                    const token = signToken(user._id);
+
+                    return res.send({ token }) 
+                }
+                return res.send('Usuario y/o contraseña incorrectos');
+            })
+        })
 });
 
 router.put('/:id', (req, res) => {

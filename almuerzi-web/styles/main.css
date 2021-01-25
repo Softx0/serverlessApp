@@ -35,3 +35,15 @@ ul {
 #submit:hover{
     background-color: #287da1 ;
 }
+
+#submit:disabled{
+    background-color: #ccc;
+}
+
+.selected {
+    background-color: #c2f8bb;
+}
+
+#meals-list li {
+    cursor: pointer;
+}

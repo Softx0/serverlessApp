@@ -1,6 +1,6 @@
 const express = require('express');
 const Orders = require('../models/Orders');
-const isAuthenticated = require('../auth/index');
+const { isAuthenticated, hasRole } = require('../auth/index');
 
 const router = express.Router();
 

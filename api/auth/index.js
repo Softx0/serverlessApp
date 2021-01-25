@@ -3,7 +3,7 @@ const Users = require('../models/Users');
 //verificar si el user se encuentra autentificado
 
 //un middleware es una funcion en node que va a recibir req y resp y next, cuando llamemos next, ejecutara este midware
-module.exports = (req, res, next) => {
+const isAuthenticated = (req, res, next) => {
     const token = req.headers.authorization;
     if (!token){
         res.send(403);
@@ -18,4 +18,16 @@ module.exports = (req, res, next) => {
                 next()
             })
     } )
+}
+
+const hasRole = role => (req, res, next) => {
+    if (req.user.role === role){
+        return next()
+    }
+    res.sendStatus(403);
+}
+
+module.exports = {
+    isAuthenticated,
+    hasRole,
 }

@@ -108,6 +108,15 @@ const initializeData = () => {
 }
 
 window.onload = () => {
-    // initializeForm();
-    // initializeData();
+
+    fetch('https://serverless-app.softx0.vercel.app/api/auth/register', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email: 'enmanuel@gmail.com', password: '123456' })
+    })
+
+    initializeForm();
+    initializeData();
 }

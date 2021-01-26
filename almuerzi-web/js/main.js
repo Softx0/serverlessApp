@@ -109,14 +109,28 @@ const initializeData = () => {
 
 window.onload = () => {
 
-    fetch('https://serverless-app.softx0.vercel.app/api/auth/register', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ email: 'enmanuel@gmail.com', password: '123456' })
-    })
+    const loginForm = document.getElementById('login-form');
 
-    initializeForm();
-    initializeData();
+    //recordemos que estos forms recibenn eventos
+    loginForm.onsubmit = (e) => {
+        e.preventDefault();
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+
+        fetch('https://serverless-app.softx0.vercel.app/api/auth/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            // body: JSON.stringify({ email: email, password: password })
+            //cuando la propieddad tiene el mismo nombre de la varieble pues..
+            body: JSON.stringify({ email, password })
+        }).then(respuesta => respuesta.json())
+            .then(miToken => {
+                localStorage.setItem('token', miToken.token);
+            });
+    }
+
+    // initializeForm();
+    // initializeData();
 }

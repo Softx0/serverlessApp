@@ -108,6 +108,6 @@ const initializeData = () => {
 }
 
 window.onload = () => {
-    initializeForm();
-    initializeData();
+    // initializeForm();
+    // initializeData();
 }

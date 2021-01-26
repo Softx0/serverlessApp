@@ -1,33 +1,43 @@
 <!DOCTYPE html>
-    <html>
+<html>
 
-    <head>
-        <meta charset="utf-8">
-        <title>Almuerzi Web</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="../styles/main.css" type="text/css">
-    </head>
+<head>
+    <meta charset="utf-8">
+    <title>Almuerzi Web</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../styles/main.css" type="text/css">
+</head>
 
-    <body>
+<body>
 
+    <div class="form-main" >
+        <p class="form-title" >Login</p>
+        <form class="login-form" >  
+            <input placeholder="Nombre de usuario" />
+            <input placeholder="Contraseña" />
+            <input type="submit" value="Enviar" />
+        </form>
+    </div>
+    <template></template>
+
+    <template id="orders-view" >
         <div id="meals">
             <ul id="meals-list">
-                <p id="cargando" >Cargando...</p>
+                <p id="cargando">Cargando...</p>
             </ul>
-            <form id="order" >
+            <form id="order">
                 <input id="mealsId" type="hidden" />
                 <input id="submit" disabled type="submit" />
             </form>
         </div>
-
         <div id="orders">
             <ul id="orders-list">
-                <p id="cargando" >Cargando...</p>
+                <p id="cargando">Cargando...</p>
             </ul>
         </div>
+    </template>
+</body>
+<script src="../js/main.js"></script>
 
-        <script src="../js/main.js"></script>
-    </body>
-
-    </html>
+</html>

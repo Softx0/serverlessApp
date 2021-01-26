@@ -1,4 +1,5 @@
 let mealsState = [];
+let ruta = 'login';
 
 const stringToHTML = (cadena) => {
     const parser = new DOMParser();
@@ -57,7 +58,7 @@ const initializeForm = () => {
 
         const token = localStorage.getItem('token');
 
-        fetch(`https://serverless-app.softx0.vercel.app/api/orders`, {
+        fetch('https://serverless-app.softx0.vercel.app/api/orders', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -107,7 +108,6 @@ const initializeData = () => {
 }
 
 window.onload = () => {
-
     initializeForm();
     initializeData();
 }

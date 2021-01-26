@@ -19,10 +19,10 @@ router.get('/:id', (req, res) => {
 router.post('/', isAuthenticated, (req, res) => {
     const { _id } = req.user
     Orders.create({ ...req.body, user_id: _id }).then(x => res.status(201).send(x));
-    res.send('post meals');
+    res.send(req.user);
 });
 
-router.put('/:id', isAuthenticated, hasRoles(['admin', 'user']), (req, res) => {
+router.put('/:id', isAuthenticated, (req, res) => {
     Orders.findOneAndUpdate(req.params.id, req.body)
         .then(() => res.sendStatus(204))
 });

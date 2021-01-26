@@ -3,7 +3,7 @@ const Users = require('../models/Users');
 const crypto = require('crypto');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
-const { isAuthenticated } = require('../auth/');
+const { isAuthenticated } = require('../auth/index');
 
 const signToken = (_id) => {
     return jwt.sign({ _id }, 'mi-secreto', {
@@ -58,7 +58,7 @@ router.post('/login', (req, res) => {
                 if (user.password === encryptedPassword) {
                     const token = signToken(user._id);
 
-                    return res.send({ token }) 
+                    return res.send({ token })
                 }
                 return res.send('Usuario y/o contraseña incorrectos');
             })

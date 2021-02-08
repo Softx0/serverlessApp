@@ -4,8 +4,8 @@ const Users = require('../models/Users');
 
 //un middleware es una funcion en node que va a recibir req y resp y next, cuando llamemos next, ejecutara este midware
 const isAuthenticated = (req, res, next) => {
-    const token = req.headers.authorization;
-    localStorage.setItem('token', token.toString());
+    let token = req.headers.authorization;
+    // window.localStorage.setItem('token', token);
     if (!token) {
         res.send(403);
     }
@@ -17,8 +17,8 @@ const isAuthenticated = (req, res, next) => {
             .then(user => {
                 req.user = user;
                 next()
-            })
-    })
+            });
+    });
 }
 
 const hasRoles = roles => (req, res, next) => {
